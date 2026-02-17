@@ -1,0 +1,92 @@
+[
+  {
+    "type": "talk",
+    "startTime": "10:00 AM",
+    "endTime": "11:00 AM",
+    "title": "Introduction to AI",
+    "speakers": ["Dr. Jane Doe"],
+    "category": ["AI", "Machine Learning"],
+    "description": "An overview of artificial intelligence and its applications."
+  },
+  {
+    "type": "transition",
+    "startTime": "11:00 AM",
+    "endTime": "11:10 AM"
+  },
+  {
+    "type": "talk",
+    "startTime": "11:10 AM",
+    "endTime": "12:10 PM",
+    "title": "Web Development with Node.js",
+    "speakers": ["John Smith"],
+    "category": ["Web Development", "Node.js"],
+    "description": "Building scalable web applications using Node.js and Express."
+  },
+  {
+    "type": "transition",
+    "startTime": "12:10 PM",
+    "endTime": "12:20 PM"
+  },
+  {
+    "type": "break",
+    "startTime": "12:20 PM",
+    "endTime": "01:20 PM",
+    "title": "Lunch Break"
+  },
+  {
+    "type": "transition",
+    "startTime": "01:20 PM",
+    "endTime": "01:30 PM"
+  },
+  {
+    "type": "talk",
+    "startTime": "01:30 PM",
+    "endTime": "02:30 PM",
+    "title": "Cloud Computing Fundamentals",
+    "speakers": ["Alice Johnson"],
+    "category": ["Cloud", "AWS", "Azure"],
+    "description": "Understanding the basics of cloud computing and major providers."
+  },
+  {
+    "type": "transition",
+    "startTime": "02:30 PM",
+    "endTime": "02:40 PM"
+  },
+  {
+    "type": "talk",
+    "startTime": "02:40 PM",
+    "endTime": "03:40 PM",
+    "title": "Data Science with Python",
+    "speakers": ["Robert Brown"],
+    "category": ["Data Science", "Python"],
+    "description": "Exploring data analysis and machine learning techniques using Python."
+  },
+  {
+    "type": "transition",
+    "startTime": "03:40 PM",
+    "endTime": "03:50 PM"
+  },
+  {
+    "type": "talk",
+    "startTime": "03:50 PM",
+    "endTime": "04:50 PM",
+    "title": "Security in Software Development",
+    "speakers": ["Emily White"],
+    "category": ["Security", "DevSecOps"],
+    "description": "Best practices for building secure software."
+  },
+  {
+    "type": "transition",
+    "startTime": "04:50 PM",
+    "endTime": "05:00 PM"
+  },
+  {
+    "type": "talk",
+    "startTime": "05:00 PM",
+    "endTime": "06:00 PM",
+    "title": "Future of Tech: Panel Discussion",
+    "speakers": ["Various Speakers"],
+    "category": ["Trends", "Future Tech"],
+    "description": "A discussion on emerging technologies and their impact."
+  }
+]

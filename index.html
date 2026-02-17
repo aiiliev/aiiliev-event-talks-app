@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Talks Event Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #0056b3;
+        }
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-container input {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .schedule-item {
+            background-color: #e9ecef;
+            border-left: 5px solid #0056b3;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .schedule-item.talk {
+            border-left-color: #28a745;
+        }
+        .schedule-item.break {
+            border-left-color: #ffc107;
+        }
+        .schedule-item.transition {
+            border-left-color: #6c757d;
+            font-style: italic;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .schedule-item h3 {
+            margin-top: 0;
+            color: #28a745;
+        }
+        .schedule-item.break h3 {
+            color: #ffc107;
+        }
+        .schedule-item.transition h3 {
+            color: #6c757d;
+        }
+        .schedule-item p {
+            margin: 5px 0;
+        }
+        .schedule-item strong {
+            color: #0056b3;
+        }
+        .schedule-item .category span {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 3px;
+            margin-right: 5px;
+            font-size: 0.8em;
+        }
+        .speaker-list span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Technical Talks Event Schedule</h1>
+        <div class="search-container">
+            <input type="text" id="categorySearch" placeholder="Search by category (e.g., AI, Node.js)">
+        </div>
+        <div id="schedule"></div>
+    </div>
+
+    <script>
+        const talkData = [
+            {
+                "type": "talk",
+                "startTime": "10:00 AM",
+                "endTime": "11:00 AM",
+                "title": "Introduction to AI",
+                "speakers": ["Dr. Jane Doe"],
+                "category": ["AI", "Machine Learning"],
+                "description": "An overview of artificial intelligence and its applications."
+            },
+            {
+                "type": "transition",
+                "startTime": "11:00 AM",
+                "endTime": "11:10 AM"
+            },
+            {
+                "type": "talk",
+                "startTime": "11:10 AM",
+                "endTime": "12:10 PM",
+                "title": "Web Development with Node.js",
+                "speakers": ["John Smith"],
+                "category": ["Web Development", "Node.js"],
+                "description": "Building scalable web applications using Node.js and Express."
+            },
+            {
+                "type": "transition",
+                "startTime": "12:10 PM",
+                "endTime": "12:20 PM"
+            },
+            {
+                "type": "break",
+                "startTime": "12:20 PM",
+                "endTime": "01:20 PM",
+                "title": "Lunch Break"
+            },
+            {
+                "type": "transition",
+                "startTime": "01:20 PM",
+                "endTime": "01:30 PM"
+            },
+            {
+                "type": "talk",
+                "startTime": "01:30 PM",
+                "endTime": "02:30 PM",
+                "title": "Cloud Computing Fundamentals",
+                "speakers": ["Alice Johnson"],
+                "category": ["Cloud", "AWS", "Azure"],
+                "description": "Understanding the basics of cloud computing and major providers."
+            },
+            {
+                "type": "transition",
+                "startTime": "02:30 PM",
+                "endTime": "02:40 PM"
+            },
+            {
+                "type": "talk",
+                "startTime": "02:40 PM",
+                "endTime": "03:40 PM",
+                "title": "Data Science with Python",
+                "speakers": ["Robert Brown"],
+                "category": ["Data Science", "Python"],
+                "description": "Exploring data analysis and machine learning techniques using Python."
+            },
+            {
+                "type": "transition",
+                "startTime": "03:40 PM",
+                "endTime": "03:50 PM"
+            },
+            {
+                "type": "talk",
+                "startTime": "03:50 PM",
+                "endTime": "04:50 PM",
+                "title": "Security in Software Development",
+                "speakers": ["Emily White"],
+                "category": ["Security", "DevSecOps"],
+                "description": "Best practices for building secure software."
+            },
+            {
+                "type": "transition",
+                "startTime": "04:50 PM",
+                "endTime": "05:00 PM"
+            },
+            {
+                "type": "talk",
+                "startTime": "05:00 PM",
+                "endTime": "06:00 PM",
+                "title": "Future of Tech: Panel Discussion",
+                "speakers": ["Various Speakers"],
+                "category": ["Trends", "Future Tech"],
+                "description": "A discussion on emerging technologies and their impact."
+            }
+        ];
+
+        const scheduleDiv = document.getElementById('schedule');
+        const searchInput = document.getElementById('categorySearch');
+
+        function renderSchedule(data) {
+            scheduleDiv.innerHTML = ''; // Clear current schedule
+            data.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('schedule-item', item.type);
+
+                let content = `<p><strong>${item.startTime} - ${item.endTime}</strong></p>`;
+
+                if (item.type === 'talk') {
+                    content += `<h3>${item.title}</h3>`;
+                    if (item.speakers && item.speakers.length > 0) {
+                        content += `<p class="speaker-list">Speakers: <span>${item.speakers.join(', ')}</span></p>`;
+                    }
+                    if (item.category && item.category.length > 0) {
+                        content += `<p class="category">Categories: ${item.category.map(cat => `<span>${cat}</span>`).join('')}</p>`;
+                    }
+                    content += `<p>${item.description}</p>`;
+                } else if (item.type === 'break') {
+                    content += `<h3>${item.title}</h3>`;
+                } else if (item.type === 'transition') {
+                    content += `<p>Transition Time</p>`;
+                }
+
+                itemDiv.innerHTML = content;
+                scheduleDiv.appendChild(itemDiv);
+            });
+        }
+
+        function filterSchedule() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (!searchTerm) {
+                renderSchedule(talkData); // If search term is empty, show all
+                return;
+            }
+
+            const filteredData = talkData.filter(item => {
+                if (item.type === 'talk' && item.category) {
+                    return item.category.some(cat => cat.toLowerCase().includes(searchTerm));
+                }
+                return false; // Only filter talks
+            });
+            renderSchedule(filteredData);
+        }
+
+        // Initial render
+        renderSchedule(talkData);
+
+        // Add event listener for search input
+        searchInput.addEventListener('keyup', filterSchedule);
+        searchInput.addEventListener('change', filterSchedule); // For clearing input via 'x' button
+    </script>
+</body>
+</html>
